@@ -150,8 +150,11 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-slate-950">
+        <div className="flex items-center gap-3 rounded-full border border-slate-800 bg-slate-900 px-5 py-3 text-sm text-slate-300 shadow-lg shadow-sky-900/40">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-sky-400" />
+          Loading your workspace
+        </div>
       </div>
     );
   }
@@ -170,14 +173,22 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <nav className="bg-white shadow-sm border-b">
+    <div className="min-h-screen bg-slate-950 text-slate-50">
+      <nav className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold text-gray-900">TaskFlow AI</h1>
+            <h1 className="text-2xl font-semibold tracking-tight bg-gradient-to-r from-sky-400 via-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">
+              TaskFlow AI
+            </h1>
             <div className="flex items-center gap-4">
-              <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
-              <Button variant="outline" onClick={handleLogout}>
+              <span className="hidden text-sm text-slate-300 sm:inline">
+                Welcome, <span className="font-medium">{user?.name}</span>
+              </span>
+              <Button
+                variant="outline"
+                onClick={handleLogout}
+                className="border-slate-700 bg-slate-900 hover:bg-slate-800 hover:border-slate-500"
+              >
                 <LogOut className="mr-2 h-4 w-4" />
                 Logout
               </Button>
@@ -187,42 +198,61 @@ export default function DashboardPage() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm text-gray-600">Total Tasks</div>
-            <div className="text-3xl font-bold text-gray-900">{stats.total}</div>
+        <div className="mb-8 grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-sky-900/40">
+            <div className="text-xs font-medium uppercase tracking-wide text-slate-400">
+              Total Tasks
+            </div>
+            <div className="mt-3 flex items-baseline gap-2">
+              <div className="text-3xl font-semibold text-slate-50">{stats.total}</div>
+              <span className="text-xs text-slate-400">in this workspace</span>
+            </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm text-gray-600">To Do</div>
-            <div className="text-3xl font-bold text-blue-600">{stats.todo}</div>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-blue-900/40">
+            <div className="text-xs font-medium uppercase tracking-wide text-slate-400">
+              To Do
+            </div>
+            <div className="mt-3 text-3xl font-semibold text-sky-400">{stats.todo}</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm text-gray-600">In Progress</div>
-            <div className="text-3xl font-bold text-yellow-600">{stats.inProgress}</div>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-amber-900/40">
+            <div className="text-xs font-medium uppercase tracking-wide text-slate-400">
+              In Progress
+            </div>
+            <div className="mt-3 text-3xl font-semibold text-amber-300">{stats.inProgress}</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="text-sm text-gray-600">Completed</div>
-            <div className="text-3xl font-bold text-green-600">{stats.completed}</div>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5 shadow-lg shadow-emerald-900/40">
+            <div className="text-xs font-medium uppercase tracking-wide text-slate-400">
+              Completed
+            </div>
+            <div className="mt-3 text-3xl font-semibold text-emerald-300">{stats.completed}</div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">Your Tasks</h2>
-              <Button onClick={handleCreateTask}>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold text-slate-50">Your Tasks</h2>
+                <p className="text-xs text-slate-400">
+                  Prioritize, focus, and ship with AI-powered insights.
+                </p>
+              </div>
+              <Button
+                onClick={handleCreateTask}
+                className="rounded-full bg-gradient-to-r from-sky-500 via-indigo-500 to-fuchsia-500 px-5 text-sm font-semibold shadow-lg shadow-sky-900/40 hover:from-sky-400 hover:via-indigo-400 hover:to-fuchsia-400"
+              >
                 <Plus className="mr-2 h-4 w-4" />
                 New Task
               </Button>
             </div>
 
-            <div className="flex gap-4 items-center bg-white p-4 rounded-lg shadow">
-              <Filter className="h-5 w-5 text-gray-500" />
+            <div className="flex gap-4 items-center rounded-2xl border border-slate-800 bg-slate-900/80 p-4 shadow-md shadow-slate-900/40">
+              <Filter className="h-5 w-5 text-slate-400" />
               <Select value={statusFilter} onValueChange={setStatusFilter}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] border-slate-700 bg-slate-900 text-slate-100">
                   <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="border-slate-700 bg-slate-900 text-slate-100">
                   <SelectItem value="all">All Status</SelectItem>
                   <SelectItem value="todo">To Do</SelectItem>
                   <SelectItem value="in-progress">In Progress</SelectItem>
@@ -230,10 +260,10 @@ export default function DashboardPage() {
                 </SelectContent>
               </Select>
               <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] border-slate-700 bg-slate-900 text-slate-100">
                   <SelectValue placeholder="Filter by priority" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="border-slate-700 bg-slate-900 text-slate-100">
                   <SelectItem value="all">All Priority</SelectItem>
                   <SelectItem value="low">Low</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
@@ -243,8 +273,17 @@ export default function DashboardPage() {
             </div>
 
             {filteredTasks.length === 0 ? (
-              <div className="bg-white rounded-lg shadow p-12 text-center">
-                <p className="text-gray-500 text-lg">No tasks found. Create your first task!</p>
+              <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-900/70 p-10 text-center shadow-inner shadow-slate-950/60">
+                <p className="text-slate-300 text-lg mb-2">No tasks found yet</p>
+                <p className="text-sm text-slate-500 mb-4">
+                  Create your first task to let TaskFlow AI start prioritizing your work.
+                </p>
+                <Button
+                  onClick={handleCreateTask}
+                  className="rounded-full bg-sky-500 px-6 text-sm font-semibold text-white hover:bg-sky-400"
+                >
+                  Create a task
+                </Button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
