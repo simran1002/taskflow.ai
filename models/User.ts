@@ -41,7 +41,7 @@ const UserSchema: Schema = new Schema(
   }
 );
 
-UserSchema.pre('save', async function (next: (err?: Error) => void) {
+UserSchema.pre('save', async function (this: IUser, next) {
   if (!this.isModified('password')) {
     return next();
   }
