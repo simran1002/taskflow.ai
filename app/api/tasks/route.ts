@@ -12,7 +12,6 @@ const taskSchema = z.object({
   dueDate: z.string().optional(),
 });
 
-// GET /api/tasks - Get all tasks for the current user
 export async function GET(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);
@@ -48,7 +47,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST /api/tasks - Create a new task
 export async function POST(request: NextRequest) {
   try {
     const user = await getCurrentUser(request);

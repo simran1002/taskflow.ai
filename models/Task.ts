@@ -53,7 +53,6 @@ const TaskSchema: Schema = new Schema(
   }
 );
 
-// Index for efficient queries
 TaskSchema.index({ userId: 1, status: 1 });
 TaskSchema.index({ userId: 1, priority: 1 });
 TaskSchema.index({ userId: 1, dueDate: 1 });

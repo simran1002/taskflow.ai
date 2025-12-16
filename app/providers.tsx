@@ -15,7 +15,6 @@ export function Providers({ children }: { children: React.ReactNode }) {
         setUser(data.data.user);
       }
     } catch {
-      // Not authenticated, continue
     } finally {
         setLoading(false);
       }

@@ -27,46 +27,40 @@ export default function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/auth/me');
-      const data = await response.json();
-      if (data.success) {
-        setUser(data.data.user);
-      } else {
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/auth/me');
+        const data = await response.json();
+        if (data.success) {
+          setUser(data.data.user);
+        } else {
+          router.push('/login');
+        }
+      } catch {
         router.push('/login');
       }
-    } catch {
-      router.push('/login');
-    }
-  };
+    };
 
-  const fetchTasks = async () => {
-    try {
-      const params = new URLSearchParams();
-      if (statusFilter !== 'all') params.append('status', statusFilter);
-      if (priorityFilter !== 'all') params.append('priority', priorityFilter);
+    const fetchTasks = async () => {
+      try {
+        const params = new URLSearchParams();
+        if (statusFilter !== 'all') params.append('status', statusFilter);
+        if (priorityFilter !== 'all') params.append('priority', priorityFilter);
 
-      const response = await fetch(`/api/tasks?${params.toString()}`);
-      const data = await response.json();
-      if (data.success) {
-        setTasks(data.data.tasks);
+        const response = await fetch(`/api/tasks?${params.toString()}`);
+        const data = await response.json();
+        if (data.success) {
+          setTasks(data.data.tasks);
+        }
+      } catch (error) {
+        console.error('Failed to fetch tasks:', error);
       }
-    } catch (error) {
-      console.error('Failed to fetch tasks:', error);
-    }
-  };
+    };
 
-  useEffect(() => {
     checkAuth();
     fetchTasks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    fetchTasks();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [statusFilter, priorityFilter]);
+  }, [statusFilter, priorityFilter, setUser, setTasks, router]);
 
   const handleLogout = async () => {
     try {

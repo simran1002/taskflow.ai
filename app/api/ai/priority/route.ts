@@ -32,8 +32,7 @@ Consider factors like urgency, importance, and deadlines. Respond with only one 
     const result = await generateText({
       model: openai('gpt-4o-mini'),
       prompt,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      maxTokens: 10 as any,
+      maxTokens: 10 as unknown as number,
     });
 
     const priority = result.text.trim().toLowerCase();
@@ -60,7 +59,6 @@ Consider factors like urgency, importance, and deadlines. Respond with only one 
       );
     }
 
-    // Fallback to medium priority if AI fails
     return Response.json({
       success: true,
       data: {

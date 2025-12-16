@@ -12,13 +12,8 @@ const loginSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    
-    // Validate input
     const validatedData = loginSchema.parse(body);
-
     await connectDB();
-
-    // Find user and include password for comparison
     const user = await User.findOne({ email: validatedData.email }).select('+password');
     
     if (!user) {
@@ -28,7 +23,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Check password
     const isPasswordValid = await user.comparePassword(validatedData.password);
     if (!isPasswordValid) {
       return Response.json(

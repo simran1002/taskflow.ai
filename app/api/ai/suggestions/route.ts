@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user's recent tasks for context
     await connectDB();
     const recentTasks = await Task.find({ userId: user._id })
       .sort({ createdAt: -1 })
@@ -41,8 +40,7 @@ export async function POST(request: NextRequest) {
       model: openai('gpt-4o-mini'),
       system: systemPrompt,
       prompt: `Context: ${context}\n\nUser request: ${prompt}\n\nProvide helpful task management suggestions:`,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      maxTokens: 500 as any,
+      maxTokens: 500 as unknown as number,
     });
 
     return Response.json({
@@ -55,7 +53,6 @@ export async function POST(request: NextRequest) {
     console.error('AI suggestion error:', error);
     
     const errorMessage = error instanceof Error ? error.message : String(error);
-    // Handle API key errors gracefully
     if (errorMessage.includes('API key') || errorMessage.includes('OPENAI')) {
       return Response.json(
         {

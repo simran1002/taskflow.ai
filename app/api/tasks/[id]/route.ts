@@ -13,7 +13,6 @@ const updateTaskSchema = z.object({
   dueDate: z.string().optional(),
 });
 
-// GET /api/tasks/[id] - Get a single task
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -61,7 +60,6 @@ export async function GET(
   }
 }
 
-// PUT /api/tasks/[id] - Update a task
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -129,7 +127,6 @@ export async function PUT(
   }
 }
 
-// DELETE /api/tasks/[id] - Delete a task
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
