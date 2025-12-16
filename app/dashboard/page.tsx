@@ -204,7 +204,6 @@ export default function DashboardPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-900">Your Tasks</h2>
@@ -214,7 +213,6 @@ export default function DashboardPage() {
               </Button>
             </div>
 
-            {/* Filters */}
             <div className="flex gap-4 items-center bg-white p-4 rounded-lg shadow">
               <Filter className="h-5 w-5 text-gray-500" />
               <Select value={statusFilter} onValueChange={setStatusFilter}>
@@ -241,7 +239,6 @@ export default function DashboardPage() {
               </Select>
             </div>
 
-            {/* Tasks Grid */}
             {filteredTasks.length === 0 ? (
               <div className="bg-white rounded-lg shadow p-12 text-center">
                 <p className="text-gray-500 text-lg">No tasks found. Create your first task!</p>
@@ -261,7 +258,6 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Sidebar */}
           <div className="space-y-6">
             <AISuggestions />
           </div>
