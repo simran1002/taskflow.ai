@@ -17,8 +17,8 @@ export async function GET(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const params = await context.params;
   try {
+    const params = await context.params;
     const user = await getCurrentUser(request);
     if (!user) {
       return Response.json(
@@ -133,8 +133,8 @@ export async function DELETE(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
 ) {
-  const params = await context.params;
   try {
+    const params = await context.params;
     const user = await getCurrentUser(request);
     if (!user) {
       return Response.json(
