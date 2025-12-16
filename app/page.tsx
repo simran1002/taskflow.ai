@@ -6,7 +6,6 @@ import { CheckCircle2, Sparkles, Shield, Zap } from 'lucide-react';
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
       <header className="border-b bg-white/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
@@ -25,7 +24,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-4">
@@ -49,7 +47,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           <Card>
             <CardHeader>
@@ -100,7 +97,6 @@ export default function Home() {
           </Card>
         </div>
 
-        {/* CTA Section */}
         <Card className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-0">
           <CardHeader>
             <CardTitle className="text-3xl text-white">Ready to boost your productivity?</CardTitle>
@@ -116,7 +112,6 @@ export default function Home() {
         </Card>
       </main>
 
-      {/* Footer */}
       <footer className="bg-white border-t mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
