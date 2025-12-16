@@ -122,11 +122,14 @@ export default function Home() {
             <div className="text-sm text-gray-600 text-center md:text-right">
               <p className="font-semibold text-gray-900">Developer Information</p>
               <p>
-                <span className="font-medium">Name:</span> [Your Name]
+                <span className="font-medium">Name:</span> Simran Yadav
+              </p>
+              <p>
+                <span className="font-medium">Role:</span> Fullstack Developer
               </p>
               <p>
                 <a
-                  href="https://github.com/yourusername"
+                  href="https://github.com/simran1002"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
@@ -135,7 +138,7 @@ export default function Home() {
                 </a>
                 {' | '}
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/simran-yadav-10s/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline"
