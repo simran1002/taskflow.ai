@@ -41,16 +41,15 @@ const UserSchema: Schema = new Schema(
   }
 );
 
-UserSchema.pre('save', async function (this: mongoose.Document, next: mongoose.CallbackWithoutResult) {
+UserSchema.pre('save', async function (this: mongoose.Document) {
   if (!this.isModified('password')) {
-    return next();
+    return;
   }
   try {
     const salt = await bcrypt.genSalt(10);
     (this as any).password = await bcrypt.hash((this as any).password as string, salt);
-    next();
   } catch (error) {
-    next(error as Error);
+    throw error;
   }
 });
 
