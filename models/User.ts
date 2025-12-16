@@ -41,13 +41,13 @@ const UserSchema: Schema = new Schema(
   }
 );
 
-UserSchema.pre('save', async function (this: IUser, next) {
+UserSchema.pre('save', async function (this: mongoose.Document, next: mongoose.CallbackWithoutResult) {
   if (!this.isModified('password')) {
     return next();
   }
   try {
     const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password as string, salt);
+    (this as any).password = await bcrypt.hash((this as any).password as string, salt);
     next();
   } catch (error) {
     next(error as Error);
