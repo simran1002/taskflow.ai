@@ -27,6 +27,22 @@ export default function DashboardPage() {
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [priorityFilter, setPriorityFilter] = useState<string>('all');
 
+  const fetchTasks = async () => {
+    try {
+      const params = new URLSearchParams();
+      if (statusFilter !== 'all') params.append('status', statusFilter);
+      if (priorityFilter !== 'all') params.append('priority', priorityFilter);
+
+      const response = await fetch(`/api/tasks?${params.toString()}`);
+      const data = await response.json();
+      if (data.success) {
+        setTasks(data.data.tasks);
+      }
+    } catch (error) {
+      console.error('Failed to fetch tasks:', error);
+    }
+  };
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -42,25 +58,13 @@ export default function DashboardPage() {
       }
     };
 
-    const fetchTasks = async () => {
-      try {
-        const params = new URLSearchParams();
-        if (statusFilter !== 'all') params.append('status', statusFilter);
-        if (priorityFilter !== 'all') params.append('priority', priorityFilter);
-
-        const response = await fetch(`/api/tasks?${params.toString()}`);
-        const data = await response.json();
-        if (data.success) {
-          setTasks(data.data.tasks);
-        }
-      } catch (error) {
-        console.error('Failed to fetch tasks:', error);
-      }
-    };
-
     checkAuth();
     fetchTasks();
-  }, [statusFilter, priorityFilter, setUser, setTasks, router]);
+  }, [setUser, router]);
+
+  useEffect(() => {
+    fetchTasks();
+  }, [statusFilter, priorityFilter]);
 
   const handleLogout = async () => {
     try {
@@ -105,7 +109,7 @@ export default function DashboardPage() {
           addTask(data.data.task);
         }
       }
-      fetchTasks();
+      await fetchTasks();
     } catch (error) {
       console.error('Failed to save task:', error);
       throw error;

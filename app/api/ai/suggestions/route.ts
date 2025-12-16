@@ -40,8 +40,7 @@ export async function POST(request: NextRequest) {
       model: openai('gpt-4o-mini'),
       system: systemPrompt,
       prompt: `Context: ${context}\n\nUser request: ${prompt}\n\nProvide helpful task management suggestions:`,
-      maxTokens: 500 as unknown as number,
-    });
+    } as any);
 
     return Response.json({
       success: true,
